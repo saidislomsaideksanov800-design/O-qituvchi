@@ -11,8 +11,8 @@ const site = {
   seo: {
     title: "Saidislom Saideksanov — O'qituvchi, videograf, tadqiqotchi",
     description: '[META_DESCRIPTION — 150–160 belgi]',
-    url: 'https://[SITE_URL]',
-    ogImage: 'https://[SITE_URL]/og-image.jpg', // 1200×630 image in /public
+    url: 'https://o-qituvchi.vercel.app/',
+    ogImage: 'https://o-qituvchi.vercel.app/og-image.jpg', // add a 1200×630 image as public/og-image.jpg
     locale: 'uz_UZ',
   },
 
