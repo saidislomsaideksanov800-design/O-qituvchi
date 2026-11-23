@@ -1,33 +1,33 @@
-// Icon artwork exported from the design (24×24 line glyphs).
-// Each glyph is drawn two ways by <IconSprite>:
-//   "i-<name>"  3D gradient tile (pink → peach → green, glossy) — used at 48 and 32 px
-//   "g-<name>"  flat glyph for use inside buttons (20 px, currentColor)
-
+// Line icons (24×24, drawn with currentColor). One consistent style for the whole site.
 export const GLYPHS = {
-  video: '<rect x="2.5" y="6" width="13" height="12" rx="3"/><path d="M15.5 10.2 21 7v10l-5.5-3.2"/>',
-  book: '<path d="M12 6.8C10 5.2 7 4.6 3 5v13.2c4-.4 7 .2 9 1.8 2-1.6 5-2.2 9-1.8V5c-4-.4-7 .2-9 1.8Z"/><path d="M12 6.8V20"/>',
+  home: '<path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
+  calc: '<rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 7.5h8"/><path d="M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/>',
+  pen: '<path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16Z"/><path d="m13.5 6.5 4 4"/>',
+  book: '<path d="M12 7c-2-1.6-5-2.2-9-1.8v13c4-.4 7 .2 9 1.8 2-1.6 5-2.2 9-1.8v-13c-4-.4-7 .2-9 1.8Z"/><path d="M12 7v13"/>',
+  leaf: '<path d="M5 19c0-8 5-14 15-14 0 10-6 15-14 15"/><path d="M5 19c3-4 6-7 10-9"/>',
   cap: '<path d="M2 9.5 12 4.5l10 5-10 5Z"/><path d="M6 11.5V16c0 1.4 2.7 3 6 3s6-1.6 6-3v-4.5"/><path d="M22 9.5v5"/>',
-  microscope: '<path d="M4 21h16"/><path d="M7 17.5h7"/><path d="M14.5 21a6.5 6.5 0 0 0 2-11.6"/><path d="M9 3.5h4v8H9Z"/><path d="M11 11.5v3"/><path d="M8.5 14.5h5"/>',
-  bulb: '<path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.1V16h5v-.1c0-.8.4-1.6 1.1-2.1A6 6 0 0 0 12 3Z"/>',
-  play: '<path d="M8.5 5.8v12.4a.8.8 0 0 0 1.2.7l9.6-6.2a.8.8 0 0 0 0-1.4L9.7 5.1a.8.8 0 0 0-1.2.7Z" fill="currentColor"/>',
-  document: '<path d="M14 3H7.5A2.5 2.5 0 0 0 5 5.5v13A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V8Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/>',
-  mail: '<rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7.5 8 5.5 8-5.5"/>',
+  lock: '<rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+  check: '<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+  'check-circle': '<circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.7 2.7L16 9.5"/>',
+  'x-circle': '<circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/>',
+  chart: '<path d="M4 20V11M10 20V5M16 20v-6M21 20H3"/>',
+  users: '<circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5c1.8.9 3 2.9 3 5.5"/>',
+  search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>',
+  'chevron-right': '<path d="m9 5 7 7-7 7"/>',
+  'chevron-left': '<path d="m15 5-7 7 7 7"/>',
+  arrow: '<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>',
+  menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
+  close: '<path d="M6 6l12 12M18 6 6 18"/>',
+  globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z"/>',
   phone: '<path d="M5.2 3.5h2.9l1.6 4.1-2.1 1.5a11 11 0 0 0 7.3 7.3l1.5-2.1 4.1 1.6v2.9a1.9 1.9 0 0 1-2.1 1.9A16.5 16.5 0 0 1 3.3 5.6a1.9 1.9 0 0 1 1.9-2.1Z"/>',
   telegram: '<path d="M20.6 4.3 3.2 11.1c-.8.3-.8 1.4 0 1.7l4.3 1.4 1.7 5.2c.2.7 1.1.9 1.6.4l2.5-2.4 4.6 3.4c.6.4 1.4.1 1.6-.6l2.6-13.1c.2-.7-.5-1.2-1.5-.8Z"/><path d="m7.5 14.2 9.6-6.4-6.8 7.4"/>',
-  instagram: '<rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/>',
-  youtube: '<rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.2 9.2v5.6l4.8-2.8Z" fill="currentColor"/>',
-  linkedin: '<rect x="3.5" y="3.5" width="17" height="17" rx="3.5"/><path d="M8 10.5v6M8 7.6v.01M12 16.5v-6M12 13.2a2.6 2.6 0 0 1 5.2 0v3.3"/>',
-  download: '<path d="M12 4v11"/><path d="m7 10.5 5 5 5-5"/><path d="M5 20h14"/>',
-  arrow: '<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>',
-  star: '<path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8Z" fill="currentColor"/>',
-  // UI-only glyphs (never drawn as 3D tiles)
-  menu: '<path d="M4 7h16M4 12h16M4 17h10"/>',
-  close: '<path d="M6 6l12 12M18 6 6 18"/>',
-  'chevron-left': '<path d="m15 5-7 7 7 7"/>',
-  'chevron-right': '<path d="m9 5 7 7-7 7"/>',
-  external: '<path d="M14 4h6v6"/><path d="M20 4 11 13"/><path d="M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/>',
+  refresh: '<path d="M20 11a8 8 0 0 0-14.5-4.5L4 8"/><path d="M4 4v4h4"/><path d="M4 13a8 8 0 0 0 14.5 4.5L20 16"/><path d="M20 20v-4h-4"/>',
+  trophy: '<path d="M8 4h8v5a4 4 0 0 1-8 0Z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4"/><path d="M12 13v3M8.5 20h7M10 16h4v4h-4z"/>',
+  test: '<rect x="5" y="4" width="14" height="17" rx="2.5"/><path d="M9 4V3h6v1"/><path d="m9 13 2 2 4-4"/>',
+  bulb: '<path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.1V16h5v-.1c0-.8.4-1.6 1.1-2.1A6 6 0 0 0 12 3Z"/>',
+  info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.01"/>',
+  shield: '<path d="M12 3 5 6v6c0 4.2 3 7.6 7 9 4-1.4 7-4.8 7-9V6Z"/><path d="m9 12 2 2 4-4"/>',
+  target: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="M12 12h.01"/>',
+  star: '<path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8Z"/>',
+  play: '<circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l6-3.5Z"/>',
 }
-
-// The 16 icons of the 3D set.
-export const ICONS_3D = ['video', 'book', 'cap', 'microscope', 'bulb', 'play', 'document', 'mail',
-  'phone', 'telegram', 'instagram', 'youtube', 'linkedin', 'download', 'arrow', 'star']

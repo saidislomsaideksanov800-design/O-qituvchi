@@ -1,28 +1,37 @@
 import site from '../data/site.js'
-import { footer } from '../data/contact.js'
-import { Logo } from './Navbar.jsx'
+import { href } from '../lib/router.js'
+import { useT } from '../lib/i18n.jsx'
+import { Icon } from './Icon.jsx'
+import { Logo } from './Header.jsx'
 
 export default function Footer() {
+  const { t } = useT()
   return (
-    <footer className="border-t border-ink/[.08] bg-gray-light pb-8 pt-12 [--slate:101_108_121]">
-      <div className="container-page">
-        <div className="flex flex-wrap items-center justify-between gap-6 border-b border-ink/[.08] pb-8">
+    <footer className="mt-16 border-t border-line bg-white">
+      <div className="container-page grid gap-8 py-10 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div className="grid content-start gap-3">
           <Logo />
-          <nav aria-label="Pastki menyu">
-            <ul className="flex flex-wrap gap-x-6 gap-y-1">
-              {site.nav.map((item) => (
-                <li key={item.id}>
-                  <a href={`#${item.id}`} className="rounded-md text-sm text-slate no-underline hover:text-ink hover:underline hover:underline-offset-4">
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <p className="max-w-sm text-[14px] text-muted">{t('footer_about')}</p>
         </div>
-        <div className="flex flex-wrap justify-between gap-4 pt-6 text-[13px] text-slate">
-          <span>© {new Date().getFullYear()} {site.fullName}. {footer.rights}</span>
-          <a href="#top" className="text-slate">{footer.backToTop}</a>
+        <nav aria-label="Footer" className="grid content-start gap-2 text-[14px]">
+          <a href={href.home()} className="text-muted no-underline hover:text-primary">{t('nav_home')}</a>
+          <a href={href.progress()} className="text-muted no-underline hover:text-primary">{t('nav_progress')}</a>
+          <a href={href.parents()} className="text-muted no-underline hover:text-primary">{t('nav_parents')}</a>
+        </nav>
+        <div className="grid content-start gap-2 text-[14px]">
+          <span className="font-semibold">{t('author')}: {site.author}</span>
+          <a href={`tel:${site.phone.replace(/\s/g, '')}`} className="inline-flex items-center gap-2 text-muted no-underline hover:text-primary">
+            <Icon name="phone" className="h-4 w-4" /> {site.phone}
+          </a>
+          <a href={`https://t.me/${site.telegram}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-muted no-underline hover:text-primary">
+            <Icon name="telegram" className="h-4 w-4" /> @{site.telegram}
+          </a>
+        </div>
+      </div>
+      <div className="border-t border-line">
+        <div className="container-page flex flex-wrap justify-between gap-2 py-4 text-[13px] text-muted">
+          <span>© {new Date().getFullYear()} {site.brand}</span>
+          <span>{t('footer_disclaimer')}</span>
         </div>
       </div>
     </footer>

@@ -1,46 +1,38 @@
-import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion'
-import site from './data/site.js'
-import IconSprite from './components/ui/IconSprite.jsx'
-import Navbar from './components/Navbar.jsx'
-import Hero from './components/Hero.jsx'
-import About from './components/About.jsx'
-import Skills from './components/Skills.jsx'
-import Videos from './components/Videos.jsx'
-import Research from './components/Research.jsx'
-import Resources from './components/Resources.jsx'
-import Experience from './components/Experience.jsx'
-import Testimonials from './components/Testimonials.jsx'
-import Contact from './components/Contact.jsx'
+import { LangProvider } from './lib/i18n.jsx'
+import { useRoute } from './lib/router.js'
+import { IconSprite } from './components/Icon.jsx'
+import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
+import Home from './pages/Home.jsx'
+import Grade from './pages/Grade.jsx'
+import Subject from './pages/Subject.jsx'
+import Lesson from './pages/Lesson.jsx'
+import Progress from './pages/Progress.jsx'
+import Parents from './pages/Parents.jsx'
+import NotFound from './pages/NotFound.jsx'
+
+function Page({ route }) {
+  switch (route.name) {
+    case 'home': return <Home />
+    case 'grade': return <Grade g={route.g} />
+    case 'subject': return <Subject g={route.g} s={route.s} />
+    case 'lesson': return <Lesson g={route.g} s={route.s} i={route.i} />
+    case 'progress': return <Progress />
+    case 'parents': return <Parents />
+    default: return <NotFound />
+  }
+}
 
 export default function App() {
+  const route = useRoute()
   return (
-    // LazyMotion loads only the animation features we use (smaller bundle).
-    // reducedMotion="user" turns off movement for people who ask for less motion.
-    <LazyMotion features={domAnimation} strict>
-      <MotionConfig reducedMotion="user">
-        <IconSprite />
-        <a
-          href="#main"
-          className="absolute left-4 top-[-64px] z-[100] rounded-sm bg-ink px-4 py-3 text-white no-underline transition-[top] focus:top-4"
-        >
-          {site.skipLink}
-        </a>
-
-        <Navbar />
-        <main id="main">
-          <Hero />
-          <About />
-          <Skills />
-          <Videos />
-          <Research />
-          <Resources />
-          <Experience />
-          <Testimonials />
-          <Contact />
-        </main>
-        <Footer />
-      </MotionConfig>
-    </LazyMotion>
+    <LangProvider>
+      <IconSprite />
+      <Header route={route} />
+      <main id="main" tabIndex={-1} className="outline-none">
+        <Page route={route} />
+      </main>
+      <Footer />
+    </LangProvider>
   )
 }

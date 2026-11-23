@@ -2,92 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ---------- Base ---------- */
 @layer base {
-  :root { --slate: 107 114 128; } /* #6B7280 */
-
-  html { scroll-behavior: smooth; scroll-padding-top: 104px; -webkit-text-size-adjust: 100%; }
-  body { @apply overflow-x-hidden bg-white font-body text-body text-ink antialiased; }
-  h1, h2, h3, h4 { @apply font-head font-semibold; }
-  ::selection { @apply bg-pink-200; }
-  :focus-visible { outline: 3px solid #1F2430; outline-offset: 3px; border-radius: 8px; }
-
+  html { -webkit-text-size-adjust: 100%; }
+  body { @apply overflow-x-hidden bg-surface font-sans text-[16px] leading-[1.6] text-ink antialiased; }
+  h1, h2, h3 { @apply font-semibold; }
+  :focus-visible { outline: 3px solid #1B5BD3; outline-offset: 2px; border-radius: 6px; }
+  ::selection { @apply bg-primary-100; }
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after { animation: none !important; transition: none !important; }
+    *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
   }
 }
 
-/* ---------- Reusable pieces that need more than utilities ---------- */
 @layer components {
   .container-page { @apply mx-auto w-full max-w-page px-4 md:px-6; }
 
-  /* Section wrapper. "section-alt" is the light-gray variant. */
-  .section { @apply relative isolate overflow-hidden py-20 lg:py-30; }
-  .section-alt { @apply bg-gray-light; --slate: 101 108 121; } /* #656C79 = 4.89:1 on #F5F6F8 */
+  /* White card with soft border — the main surface of the site */
+  .card { @apply rounded-card border border-line bg-white shadow-card; }
+  .card-link { @apply card block transition duration-200 hover:-translate-y-0.5 hover:border-primary-100 hover:shadow-card-hover; }
 
-  /* Frosted glass card */
-  .glass {
-    @apply rounded-card border border-white/60 shadow-glass;
-    --slate: 101 108 121; /* pink blobs show through glass → use #656C79 to stay above 4.5:1 */
-    background: rgba(255, 255, 255, .62);
-    -webkit-backdrop-filter: blur(24px) saturate(150%);
-    backdrop-filter: blur(24px) saturate(150%);
-  }
-  .glass-strong { background: rgba(255, 255, 255, .72); }
+  /* Buttons */
+  .btn { @apply inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-btn px-5 text-[15px] font-semibold no-underline transition duration-150 disabled:pointer-events-none disabled:opacity-50; }
+  .btn-primary { @apply btn bg-primary text-white hover:bg-primary-600 active:bg-primary-700; }
+  .btn-secondary { @apply btn border border-line bg-white text-ink hover:border-primary hover:text-primary active:bg-primary-50; }
+  .btn-ghost { @apply btn text-primary hover:bg-primary-50; }
+  .btn-danger { @apply btn bg-danger text-white hover:brightness-95; }
 
-  /* Card hover / press / keyboard focus */
-  .card-hover { @apply transition duration-300 ease-soft; }
-  .card-hover:hover { @apply -translate-y-1 shadow-glass-lg; background: rgba(255, 255, 255, .72); }
-  .card-hover:active { @apply -translate-y-px; }
-  .card-hover:focus-within { box-shadow: 0 0 0 1px rgba(31,36,48,.03), 0 24px 64px rgba(31,36,48,.10), 0 0 0 3px rgba(182,243,107,.55); }
-
-  /* Soft gradient blobs behind glass */
-  .blob { @apply pointer-events-none absolute -z-10 rounded-full; filter: blur(72px); }
-  @media (max-width: 767px) { .blob { filter: blur(56px); opacity: .55; } }
-
-  /* 3D icon soft shadow */
-  .i3d { flex: none; filter: drop-shadow(0 6px 10px rgba(126,224,138,.22)) drop-shadow(0 2px 3px rgba(31,36,48,.08)); }
-
-  /* Desktop nav link with green "active" bar */
-  .nav-link { @apply relative inline-flex h-10 items-center rounded-sm px-4 text-[15px] font-medium text-slate transition-colors hover:bg-ink/5 hover:text-ink; }
-  .nav-link::after { content: ''; @apply absolute bottom-1 left-1/2 h-[3px] w-0 -translate-x-1/2 rounded-full bg-grad-green transition-all duration-300 ease-soft; }
-  .nav-link[aria-current='true'] { @apply font-semibold text-ink; }
-  .nav-link[aria-current='true']::after { @apply w-5; }
-
-  /* Text link with growing green underline */
-  .link {
-    @apply inline-flex items-center gap-1.5 pb-0.5 font-head font-semibold text-ink no-underline;
-    background: linear-gradient(135deg, #B6F36B, #7EE08A) no-repeat 0 100% / 0% 3px;
-    transition: background-size .25s cubic-bezier(.2,.7,.2,1);
-  }
-  .link:hover { background-size: 100% 3px; }
-  .link[aria-disabled='true'] { @apply cursor-not-allowed opacity-60; }
-
-  /* Image placeholders (shown until real photos are added) */
-  .ph { @apply relative h-full w-full overflow-hidden bg-grad-pink; }
-  .ph::before {
-    content: ''; position: absolute; inset: 0;
-    background-image: linear-gradient(rgba(255,255,255,.45) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.45) 1px, transparent 1px);
-    background-size: 32px 32px;
-    -webkit-mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 75%);
-    mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 75%);
-  }
-  .ph-portrait { background: radial-gradient(circle at 50% 38%, rgba(255,255,255,.85) 0 15%, transparent 15.4%), radial-gradient(ellipse 42% 30% at 50% 92%, rgba(255,255,255,.85) 0 98%, transparent 100%), linear-gradient(160deg, #FDE8EF 0%, #F9D5E2 55%, #F5F6F8 100%); }
-  .ph-desk { background: radial-gradient(circle at 36% 40%, rgba(255,255,255,.85) 0 11%, transparent 11.4%), radial-gradient(ellipse 30% 26% at 36% 82%, rgba(255,255,255,.85) 0 98%, transparent 100%), radial-gradient(circle at 74% 30%, rgba(255,255,255,.55) 0 7%, transparent 7.4%), linear-gradient(200deg, #F5F6F8 0%, #FDE8EF 50%, #F9D5E2 100%); }
-  .ph-a { background: linear-gradient(135deg, #F9D5E2 0%, #FDE8EF 45%, #F5F6F8 100%); }
-  .ph-b { background: radial-gradient(circle at 75% 30%, #fff 0 12%, transparent 40%), linear-gradient(160deg, #F5F6F8 0%, #F9D5E2 100%); }
-  .ph-c { background: radial-gradient(circle at 20% 80%, #F9D5E2 0 20%, transparent 55%), linear-gradient(200deg, #FFFFFF 0%, #F5F6F8 50%, #FDE8EF 100%); }
-  .ph-d { background: linear-gradient(120deg, #FDE8EF 0%, #FFFFFF 50%, #F9D5E2 100%); }
-  .ph-e { background: radial-gradient(ellipse at 60% 110%, #F9D5E2 0 30%, transparent 60%), linear-gradient(180deg, #F5F6F8 0%, #FDE8EF 100%); }
-  .ph-f { background: radial-gradient(circle at 30% 20%, #FDE8EF 0 25%, transparent 60%), linear-gradient(135deg, #F5F6F8 0%, #F9D5E2 100%); }
-
-  /* Video dialog */
-  .dialog { @apply w-[min(960px,calc(100vw-32px))] max-w-none overflow-visible rounded-card border border-white/60 p-0 text-ink shadow-lg; background: rgba(255,255,255,.82); -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); }
-  .dialog::backdrop { background: rgba(31,36,48,.3); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
-  .dialog[open] { animation: dialog-in .3s cubic-bezier(.2,.7,.2,1); }
-  @keyframes dialog-in { from { opacity: 0; transform: translateY(12px) scale(.98); } }
-
-  .no-scrollbar { scrollbar-width: none; }
-  .no-scrollbar::-webkit-scrollbar { display: none; }
+  /* Small status pills */
+  .pill { @apply inline-flex h-7 items-center gap-1.5 whitespace-nowrap rounded-full px-3 text-[13px] font-semibold; }
 }
