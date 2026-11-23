@@ -17,6 +17,7 @@ export default function Footer() {
           <a href={href.home()} className="text-muted no-underline hover:text-ink hover:underline">{t('nav_home')}</a>
           <a href={href.progress()} className="text-muted no-underline hover:text-ink hover:underline">{t('nav_progress')}</a>
           <a href={href.parents()} className="text-muted no-underline hover:text-ink hover:underline">{t('nav_parents')}</a>
+          <a href={href.guide()} className="text-muted no-underline hover:text-ink hover:underline">{t('nav_guide')}</a>
         </nav>
         <div className="grid content-start gap-2 text-[14px]">
           <span className="font-semibold">{t('author')}: {site.author}</span>

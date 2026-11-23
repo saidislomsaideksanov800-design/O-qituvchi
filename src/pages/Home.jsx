@@ -6,6 +6,8 @@ import { href } from '../lib/router.js'
 import { isUnlocked, lessonKey, useProgress } from '../lib/progress.js'
 import { Icon, IconTile } from '../components/Icon.jsx'
 import { ProgressBar, StatusPill } from '../components/ui.jsx'
+import { guide } from '../data/guide.js'
+import { GuideContent } from './Guide.jsx'
 
 function Search() {
   const { t, lang } = useT()
@@ -81,7 +83,8 @@ function GradeCard({ g }) {
 }
 
 export default function Home() {
-  const { t } = useT()
+  const { t, lang } = useT()
+  const L = (obj) => obj[lang] ?? obj.ru
   const pct = Math.round(site.passRatio * 100)
   const steps = [
     ['target', t('step1_t'), t('step1_d')],
@@ -135,25 +138,20 @@ export default function Home() {
           </div>
         </section>
 
-        {/* How it works */}
-        <section aria-labelledby="steps-title" className="pt-14">
-          <h2 id="steps-title" className="mb-5 text-h2-m md:text-h2">{t('steps_title')}</h2>
-          <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map(([icon, title, text], i) => (
-              <li key={icon} className="card grid content-start gap-3 p-5">
-                <div className="flex items-center justify-between">
-                  <IconTile name={icon} />
-                  <span className="text-[13px] font-semibold text-muted">0{i + 1}</span>
-                </div>
-                <h3 className="text-h3">{title}</h3>
-                <p className="text-[14px] text-muted">{text}</p>
-              </li>
-            ))}
-          </ol>
+        {/* User guide — shown right on the home page */}
+        <section id="guide" aria-labelledby="home-guide-title" className="mt-14 rounded-card bg-white p-5 ring-1 ring-line md:p-8">
+          <div className="mb-6 flex items-start gap-4">
+            <IconTile name="info" size="lg" />
+            <div>
+              <p id="home-guide-title" className="text-h2-m font-semibold md:text-h2">{L(guide.title)}</p>
+              <p className="text-muted">{L(guide.lead)}</p>
+            </div>
+          </div>
+          <GuideContent />
         </section>
 
         {/* Parents */}
-        <section className="pt-14">
+        <section className="pt-10">
           <a href={href.parents()} className="card-link flex flex-col items-start gap-4 p-6 sm:flex-row sm:items-center">
             <IconTile name="users" size="lg" />
             <div className="flex-1">

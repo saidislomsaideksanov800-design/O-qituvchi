@@ -9,6 +9,7 @@ import Subject from './pages/Subject.jsx'
 import Lesson from './pages/Lesson.jsx'
 import Progress from './pages/Progress.jsx'
 import Parents from './pages/Parents.jsx'
+import Guide from './pages/Guide.jsx'
 import NotFound from './pages/NotFound.jsx'
 
 function Page({ route }) {
@@ -19,6 +20,7 @@ function Page({ route }) {
     case 'lesson': return <Lesson g={route.g} s={route.s} i={route.i} />
     case 'progress': return <Progress />
     case 'parents': return <Parents />
+    case 'guide': return <Guide />
     default: return <NotFound />
   }
 }

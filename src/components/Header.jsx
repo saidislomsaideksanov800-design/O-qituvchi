@@ -48,6 +48,7 @@ export default function Header({ route }) {
     { to: href.home(), label: t('nav_home'), icon: 'home', active: ['home', 'grade', 'subject', 'lesson'].includes(route.name) },
     { to: href.progress(), label: t('nav_progress'), icon: 'chart', active: route.name === 'progress' },
     { to: href.parents(), label: t('nav_parents'), icon: 'users', active: route.name === 'parents' },
+    { to: href.guide(), label: t('nav_guide'), icon: 'info', active: route.name === 'guide' }, // also shown on the home page
   ]
 
   // Close the mobile menu on navigation or Esc.

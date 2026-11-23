@@ -8,6 +8,7 @@ export function parseHash(hash) {
   if (parts.length === 0) return { name: 'home' }
   if (parts[0] === 'progress' && parts.length === 1) return { name: 'progress' }
   if (parts[0] === 'parents' && parts.length === 1) return { name: 'parents' }
+  if (parts[0] === 'guide' && parts.length === 1) return { name: 'guide' }
   if (parts[0] === 'grade') {
     const g = Number(parts[1])
     if (!Number.isInteger(g)) return { name: 'notfound' }
@@ -45,4 +46,5 @@ export const href = {
   lesson: (g, s, i) => `#/grade/${g}/${s}/${i}`,
   progress: () => '#/progress',
   parents: () => '#/parents',
+  guide: () => '#/guide',
 }
