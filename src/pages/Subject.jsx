@@ -6,6 +6,7 @@ import { Icon, IconTile } from '../components/Icon.jsx'
 import { Breadcrumbs, PageTitle, ProgressBar, StatusPill } from '../components/ui.jsx'
 import { cx } from '../lib/utils.js'
 import NotFound from './NotFound.jsx'
+import { Uz } from './Lesson.jsx'
 
 export default function Subject({ g, s }) {
   const { t, lang } = useT()
@@ -40,7 +41,8 @@ export default function Subject({ g, s }) {
               </span>
               <span className="min-w-0 flex-1">
                 <span className="block text-[13px] text-muted">{t('lesson_n', { n: i })}</span>
-                <span className="block font-semibold">{lesson.title}</span>
+                <span className="block font-semibold" lang="ru">{lesson.title}</span>
+                <Uz text={lesson.uz?.title} className="text-[14px]" />
                 <span className="block text-[14px] text-muted">{open ? lesson.goal : t('locked_hint', { n: i - 1 })}</span>
               </span>
               <StatusPill status={status} />

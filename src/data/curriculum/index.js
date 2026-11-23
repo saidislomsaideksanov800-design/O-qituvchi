@@ -22,6 +22,10 @@ import grade4 from './grade4.js'
 import grade5 from './grade5.js'
 import grade6 from './grade6.js'
 
+// Uzbek translations (same order as the Russian lessons). See uz/grade1.uz.js for the format.
+const uzFiles = import.meta.glob('./uz/grade*.uz.js', { eager: true, import: 'default' })
+const uzFor = (g) => uzFiles[`./uz/grade${g}.uz.js`] || {}
+
 const grades = { 1: grade1, 2: grade2, 3: grade3, 4: grade4, 5: grade5, 6: grade6 }
 export const GRADES = [1, 2, 3, 4, 5, 6]
 
@@ -48,11 +52,13 @@ const SUBJECTS = [
 export function getSubjects(g) {
   const data = grades[g]
   if (!data) return []
+  const uz = uzFor(g)
   return SUBJECTS.filter((s) => data[s.id]?.length).map((s) => ({
     id: s.id,
     icon: s.icon,
     name: s.name(g),
-    lessons: data[s.id],
+    // Each lesson gets its Uzbek translation attached as lesson.uz (if there is one).
+    lessons: data[s.id].map((lesson, i) => ({ ...lesson, uz: uz[s.id]?.[i] || null })),
   }))
 }
 

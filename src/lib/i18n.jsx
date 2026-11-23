@@ -14,6 +14,9 @@ const ru = {
   menu_close: 'Закрыть меню',
   skip: 'Перейти к содержанию',
   lang_label: 'Язык интерфейса',
+  uz_toggle: 'Перевод на узбекский',
+  uz_on: 'Показан',
+  uz_off: 'Скрыт',
 
   hero_title: 'Домашнее задание — сам, шаг за шагом',
   hero_text: 'Выбери класс и предмет, изучи урок и пройди тест. Следующий урок откроется, когда этот будет усвоен.',
@@ -124,6 +127,9 @@ const uz = {
   menu_close: 'Menyuni yopish',
   skip: "Asosiy qismga o'tish",
   lang_label: 'Interfeys tili',
+  uz_toggle: "O'zbekcha tarjima",
+  uz_on: "Ko'rsatilgan",
+  uz_off: 'Yashirilgan',
 
   hero_title: 'Uy vazifasi — mustaqil, qadamma-qadam',
   hero_text: "Sinf va fanni tanlang, darsni o'rganing va testdan o'ting. Keyingi dars shu dars o'zlashtirilgandan keyin ochiladi.",
@@ -227,15 +233,24 @@ const uz = {
 const dict = { ru, uz }
 const LangContext = createContext(null)
 const KEY = 'darsim-lang'
+const UZ_KEY = 'darsim-uz-translation'
 
 export function LangProvider({ children }) {
   // Always start in Russian (matches the pre-rendered HTML), then load the saved choice.
   const [lang, setLangState] = useState('ru')
+  // Uzbek translations under Russian lesson text — on by default.
+  const [showUz, setShowUzState] = useState(true)
 
   useEffect(() => {
     const saved = storage.get(KEY)
     if (saved === 'uz' || saved === 'ru') setLangState(saved)
+    if (storage.get(UZ_KEY) === 'off') setShowUzState(false)
   }, [])
+
+  const setShowUz = (on) => {
+    setShowUzState(on)
+    storage.set(UZ_KEY, on ? 'on' : 'off')
+  }
 
   useEffect(() => {
     document.documentElement.lang = lang
@@ -252,7 +267,7 @@ export function LangProvider({ children }) {
     return value.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m))
   }
 
-  return <LangContext.Provider value={{ lang, setLang, t }}>{children}</LangContext.Provider>
+  return <LangContext.Provider value={{ lang, setLang, t, showUz, setShowUz }}>{children}</LangContext.Provider>
 }
 
 export const useT = () => useContext(LangContext)

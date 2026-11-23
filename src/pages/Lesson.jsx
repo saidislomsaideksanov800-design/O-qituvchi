@@ -8,9 +8,41 @@ import { Icon, IconTile } from '../components/Icon.jsx'
 import { Breadcrumbs, StatusPill } from '../components/ui.jsx'
 import NotFound from './NotFound.jsx'
 
+// ---------- Uzbek translation line: shown under Russian text, in double quotes ----------
+export function Uz({ text, className }) {
+  const { showUz } = useT()
+  if (!showUz || !text) return null
+  return (
+    <span lang="uz" className={cx('mt-0.5 block text-[15px] font-normal not-italic leading-snug text-muted', className)}>
+      “{text}”
+    </span>
+  )
+}
+
+// On/off switch for the translations.
+function UzSwitch() {
+  const { t, showUz, setShowUz } = useT()
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={showUz}
+      onClick={() => setShowUz(!showUz)}
+      className="inline-flex items-center gap-2.5 rounded-btn border border-line bg-white px-3 py-2 text-[14px] font-medium transition hover:border-ink"
+    >
+      <span className={cx('relative h-5 w-9 rounded-full transition', showUz ? 'bg-ink' : 'bg-line')} aria-hidden="true">
+        <span className={cx('absolute top-0.5 h-4 w-4 rounded-full transition-all', showUz ? 'left-[18px] bg-primary' : 'left-0.5 bg-white')} />
+      </span>
+      {t('uz_toggle')}: <span className="font-semibold">{showUz ? t('uz_on') : t('uz_off')}</span>
+    </button>
+  )
+}
+
 // ---------- Lesson explanation blocks ----------
-function Block({ block }) {
+// uz: translation for this block — a string (rule/p/quote) or an array (list items / example lines).
+function Block({ block, uz }) {
   const { t } = useT()
+  const uzAt = (i) => (Array.isArray(uz) ? uz[i] : null)
   switch (block.t) {
     case 'rule':
       return (
@@ -18,7 +50,7 @@ function Block({ block }) {
           <IconTile name="bulb" size="sm" tone="primary" className="bg-white" />
           <div>
             <p className="text-[13px] font-semibold uppercase tracking-wide text-ink">{t('rule')}</p>
-            <p className="font-medium">{block.text}</p>
+            <p className="font-medium">{block.text}<Uz text={uz} /></p>
           </div>
         </div>
       )
@@ -26,8 +58,8 @@ function Block({ block }) {
       return (
         <div className="rounded-btn border border-line bg-surface p-4">
           <p className="mb-2 text-[13px] font-semibold uppercase tracking-wide text-muted">{block.title || t('example')}</p>
-          <div className="grid gap-1 font-medium">
-            {block.lines.map((line, i) => <p key={i}>{line}</p>)}
+          <div className="grid gap-1.5 font-medium">
+            {block.lines.map((line, i) => <p key={i}>{line}<Uz text={uzAt(i)} /></p>)}
           </div>
         </div>
       )
@@ -37,7 +69,7 @@ function Block({ block }) {
           {block.items.map((item, i) => (
             <li key={i} className="flex gap-2.5">
               <Icon name="check" className="mt-1 h-[18px] w-[18px] text-success" />
-              <span>{item}</span>
+              <span>{item}<Uz text={uzAt(i)} /></span>
             </li>
           ))}
         </ul>
@@ -47,10 +79,11 @@ function Block({ block }) {
         <blockquote className="border-l-0 rounded-btn bg-warn-50 p-4 italic">
           {block.lines.map((line, i) => <p key={i}>{line}</p>)}
           {block.by && <p className="mt-2 not-italic text-[14px] text-warn">— {block.by}</p>}
+          <Uz text={Array.isArray(uz) ? uz.join(' ') : uz} className="mt-2" />
         </blockquote>
       )
     default:
-      return <p>{block.text}</p>
+      return <p>{block.text}<Uz text={uz} /></p>
   }
 }
 
@@ -72,7 +105,12 @@ function Quiz({ g, s, i, lesson, hasNext, onRetry }) {
 
   const start = () => {
     // Shuffle questions and answers every attempt. The first answer in the data is the correct one.
-    setQuestions(shuffle(lesson.quiz).map((q) => ({ ...q, options: shuffle(q.a.map((text, k) => ({ text, ok: k === 0 }))) })))
+    // Uzbek translation of a question: [question, answers (same order as q.a) or null, explanation].
+    const withUz = lesson.quiz.map((q, qi) => {
+      const [uzQ, uzA, uzWhy] = lesson.uz?.quiz?.[qi] || []
+      return { ...q, uzQ, uzWhy, uzA0: uzA?.[0], options: q.a.map((text, k) => ({ text, ok: k === 0, uz: uzA?.[k] })) }
+    })
+    setQuestions(shuffle(withUz).map((q) => ({ ...q, options: shuffle(q.options) })))
     setIdx(0); setChoice(null); setChecked(false); setScore(0); setPhase('question')
   }
 
@@ -117,7 +155,7 @@ function Quiz({ g, s, i, lesson, hasNext, onRetry }) {
                 ))}
               </span>
             </div>
-            <p className="text-[19px] font-semibold leading-snug">{q.q}</p>
+            <p className="text-[19px] font-semibold leading-snug" lang="ru">{q.q}<Uz text={q.uzQ} className="text-[16px]" /></p>
 
             <div role="radiogroup" aria-label={q.q} className="grid gap-2">
               {q.options.map((opt, k) => {
@@ -144,7 +182,7 @@ function Quiz({ g, s, i, lesson, hasNext, onRetry }) {
                       {state === 'right' && <Icon name="check" className="h-4 w-4" />}
                       {state === 'wrong' && <Icon name="close" className="h-4 w-4" />}
                     </span>
-                    <span>{opt.text}</span>
+                    <span lang="ru">{opt.text}<Uz text={opt.uz} /></span>
                   </button>
                 )
               })}
@@ -156,8 +194,9 @@ function Quiz({ g, s, i, lesson, hasNext, onRetry }) {
                 <div className="text-ink">
                   <p className="font-semibold">
                     {q.options[choice].ok ? t('correct') : t('wrong') + q.a[0]}
+                    {!q.options[choice].ok && <Uz text={q.uzA0} />}
                   </p>
-                  {q.why && <p className="text-[15px] text-muted">{q.why}</p>}
+                  {q.why && <p className="text-[15px] text-muted" lang="ru">{q.why}<Uz text={q.uzWhy} /></p>}
                 </div>
               </div>
             )}
@@ -248,16 +287,17 @@ export default function Lesson({ g, s, i }) {
             <span>{t('grade', { n: g })} · {subject.name[lang]} · {t('lesson_n', { n: i })}</span>
             {passed && <StatusPill status="done" />}
           </div>
-          <h1 className="text-h1-m md:text-h1" lang="ru">{lesson.title}</h1>
+          <h1 className="text-h1-m md:text-h1" lang="ru">{lesson.title}<Uz text={lesson.uz?.title} className="mt-1 text-[18px] md:text-[20px]" /></h1>
           <div className="flex gap-2.5 rounded-btn border border-line p-3.5">
             <Icon name="target" className="mt-0.5 h-5 w-5 text-ink" />
-            <p><span className="font-semibold">{t('goal')}: </span><span lang="ru">{lesson.goal}</span></p>
+            <p><span className="font-semibold">{t('goal')}: </span><span lang="ru">{lesson.goal}</span><Uz text={lesson.uz?.goal} /></p>
           </div>
           {lang === 'uz' && <p className="text-[14px] text-muted">{t('content_lang')}</p>}
+          {lesson.uz && <div><UzSwitch /></div>}
         </header>
 
         <div className="grid gap-4 text-[17px] leading-[1.7]" lang="ru">
-          {lesson.body.map((block, k) => <Block key={k} block={block} />)}
+          {lesson.body.map((block, k) => <Block key={k} block={block} uz={lesson.uz?.body?.[k]} />)}
         </div>
       </article>
 
