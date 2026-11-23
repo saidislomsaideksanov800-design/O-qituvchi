@@ -15,7 +15,7 @@ export function GuideContent() {
       {/* Steps */}
       <section aria-labelledby="guide-steps">
         <h2 id="guide-steps" className="mb-4 text-h2-m md:text-h2">{L(guide.stepsTitle)}</h2>
-        <ol className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {guide.steps.map((step, i) => (
             <li key={i} className="card grid content-start gap-3 p-5">
               <div className="flex items-center gap-3">
