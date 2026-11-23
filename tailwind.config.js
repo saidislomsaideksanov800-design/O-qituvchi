@@ -11,7 +11,7 @@ export default {
         ink: '#111111', // black: main text, dark sections (on yellow: 12.6:1)
         muted: '#575757', // secondary text (7.2:1 on white)
         line: '#E6E6E1', // borders
-        surface: '#F6F6F3', // page background (warm white)
+        surface: '#FDE8EF', // page background (light pink); secondary text on it is 6.1:1
         success: { DEFAULT: '#0B7A43', 50: '#E7F6EE' },
         danger: { DEFAULT: '#B42318', 50: '#FDECEA' },
         warn: { DEFAULT: '#8A5200', 50: '#FFF4E0' },
