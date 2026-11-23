@@ -25,8 +25,8 @@ export function Icon({ name, className = 'h-5 w-5' }) {
 
 // Icon inside a soft colored square — used on cards (service-portal style).
 const tones = {
-  primary: 'bg-primary-50 text-primary',
-  success: 'bg-success-50 text-success',
+  primary: 'bg-primary text-ink',
+  success: 'bg-ink text-primary',
   muted: 'bg-surface text-muted',
   warn: 'bg-warn-50 text-warn',
   white: 'bg-white/15 text-white',

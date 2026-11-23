@@ -14,16 +14,16 @@ export default function Footer() {
           <p className="max-w-sm text-[14px] text-muted">{t('footer_about')}</p>
         </div>
         <nav aria-label="Footer" className="grid content-start gap-2 text-[14px]">
-          <a href={href.home()} className="text-muted no-underline hover:text-primary">{t('nav_home')}</a>
-          <a href={href.progress()} className="text-muted no-underline hover:text-primary">{t('nav_progress')}</a>
-          <a href={href.parents()} className="text-muted no-underline hover:text-primary">{t('nav_parents')}</a>
+          <a href={href.home()} className="text-muted no-underline hover:text-ink hover:underline">{t('nav_home')}</a>
+          <a href={href.progress()} className="text-muted no-underline hover:text-ink hover:underline">{t('nav_progress')}</a>
+          <a href={href.parents()} className="text-muted no-underline hover:text-ink hover:underline">{t('nav_parents')}</a>
         </nav>
         <div className="grid content-start gap-2 text-[14px]">
           <span className="font-semibold">{t('author')}: {site.author}</span>
-          <a href={`tel:${site.phone.replace(/\s/g, '')}`} className="inline-flex items-center gap-2 text-muted no-underline hover:text-primary">
+          <a href={`tel:${site.phone.replace(/\s/g, '')}`} className="inline-flex items-center gap-2 text-muted no-underline hover:text-ink hover:underline">
             <Icon name="phone" className="h-4 w-4" /> {site.phone}
           </a>
-          <a href={`https://t.me/${site.telegram}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-muted no-underline hover:text-primary">
+          <a href={`https://t.me/${site.telegram}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-muted no-underline hover:text-ink hover:underline">
             <Icon name="telegram" className="h-4 w-4" /> @{site.telegram}
           </a>
         </div>

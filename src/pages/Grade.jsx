@@ -18,7 +18,7 @@ export default function Grade({ g }) {
       <PageTitle
         title={t('grade', { n: g })}
         lead={t('content_lang') || undefined}
-        icon={<span className="grid h-14 w-14 flex-none place-items-center rounded-2xl bg-primary text-[26px] font-bold text-white">{g}</span>}
+        icon={<span className="grid h-14 w-14 flex-none place-items-center rounded-2xl bg-primary text-[26px] font-bold text-ink">{g}</span>}
       />
       <div className="grid gap-4 sm:grid-cols-2">
         {subjects.map((s) => {
@@ -32,7 +32,7 @@ export default function Grade({ g }) {
                   {lang === 'uz' && <p className="text-[13px] text-muted">{s.name.ru}</p>}
                   <p className="text-[14px] text-muted">{t('passed_of', { c: done, n: s.lessons.length })}</p>
                 </div>
-                <Icon name="chevron-right" className="h-5 w-5 text-muted transition group-hover:translate-x-1 group-hover:text-primary" />
+                <Icon name="chevron-right" className="h-5 w-5 text-muted transition group-hover:translate-x-1 group-hover:text-ink" />
               </div>
               <ProgressBar value={done} max={s.lessons.length} />
             </a>

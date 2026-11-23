@@ -52,7 +52,7 @@ export default function Progress() {
         {rows.map(({ g, subjects }) => (
           <section key={g} className="card p-5" aria-labelledby={`pg-${g}`}>
             <h2 id={`pg-${g}`} className="mb-4 text-h3">
-              <a href={href.grade(g)} className="no-underline hover:text-primary">{t('grade', { n: g })}</a>
+              <a href={href.grade(g)} className="no-underline hover:text-ink hover:underline">{t('grade', { n: g })}</a>
             </h2>
             <ul className="grid gap-3 md:grid-cols-2">
               {subjects.map((s) => (

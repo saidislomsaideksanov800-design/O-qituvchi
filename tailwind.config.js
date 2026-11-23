@@ -1,4 +1,4 @@
-/** Design tokens — clean public-service style (blue, white, light gray). */
+/** Design tokens — black, yellow, white. Yellow is a fill (buttons, active, tiles) with black text on top. */
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
@@ -6,11 +6,12 @@ export default {
     extend: {
       screens: { nav: '960px' },
       colors: {
-        primary: { DEFAULT: '#1B5BD3', 600: '#174FB8', 700: '#123F94', 50: '#EEF4FF', 100: '#DCE8FF' },
-        ink: '#0E1A2B', // main text
-        muted: '#566173', // secondary text (6.3:1 on white)
-        line: '#E2E8F0', // borders
-        surface: '#F4F7FB', // page background
+        // Yellow: never used as text on white (too low contrast) — only as a background under black text.
+        primary: { DEFAULT: '#FFC700', 600: '#F2B900', 700: '#E0A800', 50: '#FFF7D1', 100: '#FFEC99' },
+        ink: '#111111', // black: main text, dark sections (on yellow: 12.6:1)
+        muted: '#575757', // secondary text (7.2:1 on white)
+        line: '#E6E6E1', // borders
+        surface: '#F6F6F3', // page background (warm white)
         success: { DEFAULT: '#0B7A43', 50: '#E7F6EE' },
         danger: { DEFAULT: '#B42318', 50: '#FDECEA' },
         warn: { DEFAULT: '#8A5200', 50: '#FFF4E0' },
@@ -29,7 +30,7 @@ export default {
       boxShadow: {
         card: '0 1px 2px rgba(14,26,43,.04), 0 1px 3px rgba(14,26,43,.06)',
         'card-hover': '0 6px 20px rgba(14,26,43,.08)',
-        focus: '0 0 0 3px rgba(27,91,211,.35)',
+        focus: '0 0 0 3px rgba(255,199,0,.7)',
       },
       maxWidth: { page: '1248px', prose: '720px' },
     },

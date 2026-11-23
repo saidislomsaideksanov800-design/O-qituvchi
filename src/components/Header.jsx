@@ -9,7 +9,7 @@ export function Logo() {
   const { t } = useT()
   return (
     <a href={href.home()} className="inline-flex items-center gap-3 rounded-btn no-underline">
-      <span className="grid h-10 w-10 place-items-center rounded-xl bg-primary text-white" aria-hidden="true">
+      <span className="grid h-10 w-10 place-items-center rounded-xl bg-ink text-primary" aria-hidden="true">
         <Icon name="book" className="h-6 w-6" />
       </span>
       <span className="grid leading-tight">
@@ -30,7 +30,7 @@ function LangSwitch({ className }) {
           type="button"
           onClick={() => setLang(l)}
           aria-pressed={lang === l}
-          className="h-9 rounded-[10px] px-3 text-[13px] font-semibold uppercase text-muted transition aria-pressed:bg-primary aria-pressed:text-white"
+          className="h-9 rounded-[10px] px-3 text-[13px] font-semibold uppercase text-muted transition aria-pressed:bg-ink aria-pressed:text-primary"
         >
           {l}
         </button>
@@ -68,10 +68,10 @@ export default function Header({ route }) {
       </button>
 
       {/* Thin top bar */}
-      <div className="hidden bg-primary-50 md:block">
-        <div className="container-page flex h-9 items-center justify-between text-[13px] text-primary-700">
+      <div className="hidden bg-ink md:block">
+        <div className="container-page flex h-9 items-center justify-between text-[13px] text-white">
           <span>{t('topbar')}</span>
-          <a href={`tel:${site.phone.replace(/\s/g, '')}`} className="inline-flex items-center gap-1.5 font-medium no-underline hover:underline">
+          <a href={`tel:${site.phone.replace(/\s/g, '')}`} className="inline-flex items-center gap-1.5 font-medium text-primary no-underline hover:underline">
             <Icon name="phone" className="h-4 w-4" /> {site.phone}
           </a>
         </div>
@@ -87,7 +87,7 @@ export default function Header({ route }) {
                 <a
                   href={l.to}
                   aria-current={l.active ? 'page' : undefined}
-                  className="inline-flex h-10 items-center gap-2 rounded-btn px-3.5 text-[15px] font-medium text-muted no-underline transition hover:bg-surface hover:text-ink aria-[current=page]:bg-primary-50 aria-[current=page]:text-primary"
+                  className="inline-flex h-10 items-center gap-2 rounded-btn px-3.5 text-[15px] font-medium text-muted no-underline transition hover:bg-surface hover:text-ink aria-[current=page]:bg-primary aria-[current=page]:text-ink"
                 >
                   <Icon name={l.icon} className="h-[18px] w-[18px]" />
                   {l.label}
@@ -121,7 +121,7 @@ export default function Header({ route }) {
                 <a
                   href={l.to}
                   aria-current={l.active ? 'page' : undefined}
-                  className="flex h-12 items-center gap-3 rounded-btn px-3 text-[16px] font-medium no-underline hover:bg-surface aria-[current=page]:bg-primary-50 aria-[current=page]:text-primary"
+                  className="flex h-12 items-center gap-3 rounded-btn px-3 text-[16px] font-medium no-underline hover:bg-surface aria-[current=page]:bg-primary aria-[current=page]:text-ink"
                 >
                   <Icon name={l.icon} />
                   {l.label}

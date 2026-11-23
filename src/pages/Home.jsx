@@ -26,7 +26,7 @@ function Search() {
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder={t('search_ph')}
-          className="h-12 w-full rounded-btn border border-line bg-white pl-12 pr-4 text-[16px] outline-none transition placeholder:text-muted focus:border-primary focus:shadow-focus"
+          className="h-12 w-full rounded-btn border border-line bg-white pl-12 pr-4 text-[16px] outline-none transition placeholder:text-muted focus:border-ink focus:shadow-focus"
         />
       </div>
       {query.length >= 2 && (
@@ -68,8 +68,8 @@ function GradeCard({ g }) {
   return (
     <a href={href.grade(g)} className="card-link group grid gap-4 p-5">
       <div className="flex items-center justify-between">
-        <span className="grid h-14 w-14 place-items-center rounded-2xl bg-primary-50 text-[26px] font-bold text-primary">{g}</span>
-        <Icon name="arrow" className="h-5 w-5 text-muted transition group-hover:translate-x-1 group-hover:text-primary" />
+        <span className="grid h-14 w-14 place-items-center rounded-2xl bg-primary text-[26px] font-bold text-ink">{g}</span>
+        <Icon name="arrow" className="h-5 w-5 text-muted transition group-hover:translate-x-1 group-hover:text-ink" />
       </div>
       <div>
         <h3 className="text-h3">{t('grade', { n: g })}</h3>
@@ -93,13 +93,13 @@ export default function Home() {
   return (
     <>
       {/* Hero banner */}
-      <section className="bg-gradient-to-br from-primary to-[#2C74F0] text-white">
+      <section className="bg-ink text-white">
         <div className="container-page grid items-center gap-8 pb-16 pt-10 md:pb-20 md:pt-14 lg:grid-cols-[1.3fr_1fr]">
           <div className="grid gap-5">
             <h1 className="text-h1-m md:text-h1">{t('hero_title')}</h1>
             <p className="max-w-xl text-[17px] text-white/90">{t('hero_text')}</p>
             <div className="flex flex-wrap gap-3">
-              <a href="#grades" onClick={(e) => { e.preventDefault(); document.getElementById('grades')?.scrollIntoView({ behavior: 'smooth' }) }} className="btn bg-white text-primary hover:bg-primary-50">
+              <a href="#grades" onClick={(e) => { e.preventDefault(); document.getElementById('grades')?.scrollIntoView({ behavior: 'smooth' }) }} className="btn bg-primary text-ink hover:bg-primary-600">
                 {t('hero_cta')} <Icon name="arrow" />
               </a>
               <a href={href.progress()} className="btn border border-white/40 text-white hover:bg-white/10">

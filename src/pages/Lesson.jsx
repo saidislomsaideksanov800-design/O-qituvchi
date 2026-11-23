@@ -17,7 +17,7 @@ function Block({ block }) {
         <div className="flex gap-3 rounded-btn bg-primary-50 p-4">
           <IconTile name="bulb" size="sm" tone="primary" className="bg-white" />
           <div>
-            <p className="text-[13px] font-semibold uppercase tracking-wide text-primary-700">{t('rule')}</p>
+            <p className="text-[13px] font-semibold uppercase tracking-wide text-ink">{t('rule')}</p>
             <p className="font-medium">{block.text}</p>
           </div>
         </div>
@@ -113,7 +113,7 @@ function Quiz({ g, s, i, lesson, hasNext, onRetry }) {
               <span>{t('question_of', { i: idx + 1, n: total })}</span>
               <span className="flex gap-1" aria-hidden="true">
                 {questions.map((_, k) => (
-                  <span key={k} className={cx('h-2 w-6 rounded-full', k < idx ? 'bg-primary' : k === idx ? 'bg-primary/50' : 'bg-line')} />
+                  <span key={k} className={cx('h-2 w-6 rounded-full', k < idx ? 'bg-ink' : k === idx ? 'bg-primary' : 'bg-line')} />
                 ))}
               </span>
             </div>
@@ -133,14 +133,14 @@ function Quiz({ g, s, i, lesson, hasNext, onRetry }) {
                     onClick={() => setChoice(k)}
                     className={cx(
                       'flex min-h-[52px] items-center gap-3 rounded-btn border-2 px-4 py-3 text-left text-[16px] transition disabled:cursor-default',
-                      state === 'idle' && 'border-line bg-white hover:border-primary-100 hover:bg-primary-50',
-                      state === 'selected' && 'border-primary bg-primary-50',
+                      state === 'idle' && 'border-line bg-white hover:border-ink/40 hover:bg-primary-50',
+                      state === 'selected' && 'border-ink bg-primary-50',
                       state === 'right' && 'border-success bg-success-50',
                       state === 'wrong' && 'border-danger bg-danger-50',
                     )}
                   >
                     <span className={cx('grid h-6 w-6 flex-none place-items-center rounded-full border-2',
-                      state === 'selected' ? 'border-primary bg-primary text-white' : state === 'right' ? 'border-success bg-success text-white' : state === 'wrong' ? 'border-danger bg-danger text-white' : 'border-line')}>
+                      state === 'selected' ? 'border-ink bg-ink text-white' : state === 'right' ? 'border-success bg-success text-white' : state === 'wrong' ? 'border-danger bg-danger text-white' : 'border-line')}>
                       {state === 'right' && <Icon name="check" className="h-4 w-4" />}
                       {state === 'wrong' && <Icon name="close" className="h-4 w-4" />}
                     </span>
@@ -250,7 +250,7 @@ export default function Lesson({ g, s, i }) {
           </div>
           <h1 className="text-h1-m md:text-h1" lang="ru">{lesson.title}</h1>
           <div className="flex gap-2.5 rounded-btn border border-line p-3.5">
-            <Icon name="target" className="mt-0.5 h-5 w-5 text-primary" />
+            <Icon name="target" className="mt-0.5 h-5 w-5 text-ink" />
             <p><span className="font-semibold">{t('goal')}: </span><span lang="ru">{lesson.goal}</span></p>
           </div>
           {lang === 'uz' && <p className="text-[14px] text-muted">{t('content_lang')}</p>}

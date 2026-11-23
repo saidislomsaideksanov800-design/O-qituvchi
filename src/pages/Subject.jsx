@@ -35,7 +35,7 @@ export default function Subject({ g, s }) {
           const inner = (
             <>
               <span className={cx('grid h-11 w-11 flex-none place-items-center rounded-full text-[16px] font-bold',
-                passed ? 'bg-success text-white' : open ? 'bg-primary text-white' : 'bg-surface text-muted')}>
+                passed ? 'bg-ink text-primary' : open ? 'bg-primary text-ink' : 'bg-surface text-muted')}>
                 {passed ? <Icon name="check" /> : open ? i : <Icon name="lock" className="h-[18px] w-[18px]" />}
               </span>
               <span className="min-w-0 flex-1">

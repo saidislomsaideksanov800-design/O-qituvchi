@@ -14,7 +14,7 @@ export function Breadcrumbs({ items }) {
           <li key={i} className="inline-flex items-center gap-1.5">
             {i > 0 && <Icon name="chevron-right" className="h-4 w-4 text-line" />}
             {item.to && i < all.length - 1 ? (
-              <a href={item.to} className="text-primary no-underline hover:underline">{item.label}</a>
+              <a href={item.to} className="text-ink underline decoration-primary decoration-2 underline-offset-4 hover:decoration-ink">{item.label}</a>
             ) : (
               <span aria-current="page" className="text-ink">{item.label}</span>
             )}
@@ -28,8 +28,8 @@ export function Breadcrumbs({ items }) {
 export function ProgressBar({ value, max, className, label }) {
   const pct = max ? Math.round((value / max) * 100) : 0
   return (
-    <div className={cx('h-2 overflow-hidden rounded-full bg-surface', className)} role="progressbar" aria-label={label || `${value} / ${max}`} aria-valuemin={0} aria-valuemax={max} aria-valuenow={value}>
-      <div className={cx('h-full rounded-full transition-all', pct === 100 ? 'bg-success' : 'bg-primary')} style={{ width: `${pct}%` }} />
+    <div className={cx('h-2 overflow-hidden rounded-full bg-ink/10', className)} role="progressbar" aria-label={label || `${value} / ${max}`} aria-valuemin={0} aria-valuemax={max} aria-valuenow={value}>
+      <div className={cx('h-full rounded-full transition-all', pct === 100 ? 'bg-ink' : 'bg-primary')} style={{ width: `${pct}%` }} />
     </div>
   )
 }
@@ -50,8 +50,8 @@ export function PageTitle({ title, lead, icon }) {
 export function StatusPill({ status }) {
   const { t } = useT()
   const map = {
-    done: ['bg-success-50 text-success', 'check', t('status_done')],
-    open: ['bg-primary-50 text-primary', 'play', t('status_open')],
+    done: ['bg-ink text-primary', 'check', t('status_done')],
+    open: ['bg-primary text-ink', 'play', t('status_open')],
     locked: ['bg-surface text-muted', 'lock', t('status_locked')],
   }
   const [cls, icon, label] = map[status]
